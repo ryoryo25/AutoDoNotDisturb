@@ -1,7 +1,7 @@
 package com.ryoryo.autodonotdisturb
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.ryoryo.autodonotdisturb.background.DoNotDisturbService
 import com.ryoryo.autodonotdisturb.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +30,13 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+//        val test = (getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager).runningAppProcesses
+//        for (appInfo in test) {
+//            Log.i("AutoDoNotDisturb", "Running: " + appInfo.processName)
+//        }
+        val intent = Intent(application, DoNotDisturbService::class.java)
+        startService(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
